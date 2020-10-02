@@ -1,25 +1,28 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import InicioLogin from './components/InicioLogin';
+import Dashboard from './components/dashboard/Dashboard';
+import LlantasState from './context/llantasState';
+import CrearRecibo from './components/dashboard/CrearRecibo';
+import Imprimir from './components/dashboard/Imprimir';
+import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <LlantasState>
+  <Router>
+    <Switch>
+      <Route exact path='/' component={InicioLogin}/>
+      <Route exact path='/' component={InicioLogin}/>
+      <Route exact path='/dashboard' render={(props)=> <Dashboard {...props} palabra='dashboard'/>}/>
+      <Route exact path='/dashboard/estadisticas' render={(props)=> <Dashboard {...props} palabra='estadisticas'/>}/>
+      <Route exact path='/dashboard/clientes' render={(props)=> <Dashboard {...props} palabra='clientes'/>}/>
+      <Route exact path='/dashboard/crear-recibo' render={(props)=> <Dashboard {...props} palabra='recibo'/>}/>
+      <Route exact path='/dashboard/crear-recibo/imprimir' component={Imprimir}/>
+      <Route exact path='/dashboard/kiki' component={CrearRecibo}/>
+    </Switch>
+  </Router>
+  </LlantasState>
   );
 }
 
