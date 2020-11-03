@@ -7,7 +7,7 @@ const CurvaGrafico = ({dataMaster, etiqueta}) => {
 
     
 const data = {
-    labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Octubre', 'Septiembre','Noviembre', 'Diciembre'],
+    labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto',  'Septiembre','Octubre','Noviembre', 'Diciembre'],
   datasets: [
     {
       label: etiqueta,
@@ -35,10 +35,12 @@ const data = {
     return (
         
         <Line data={data} width={20}
-        height={400}
+        height={250}
         options={{
             maintainAspectRatio: false
           }}
+
+          
         />
    
       );

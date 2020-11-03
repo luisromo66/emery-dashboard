@@ -9,7 +9,7 @@ export default function MaterialTableDemo() {
       { title: '#Folio', field: 'name' },
       {title: 'Fecha', field: 'fecha'},
       { title: 'Nombre del cliente', field: 'surname' },
-      { title: '#Llantas', field: 'birthYear'},
+      { title: 'Ejemplo', field: 'birthYear'},
       {title: 'Pago', field: 'pago',  }
       
     ],
@@ -20,12 +20,12 @@ export default function MaterialTableDemo() {
     
    
   });
-
+     
   
 
   return (
     <MaterialTable
-      title="Clientes del dia de hoy"
+      title=""
       icons={tableIcons}
       actions={[
         {
@@ -47,7 +47,6 @@ export default function MaterialTableDemo() {
       data={state.data}
       editable={{
        
-     
         onRowDelete: (oldData) =>
           new Promise((resolve) => {
             setTimeout(() => {

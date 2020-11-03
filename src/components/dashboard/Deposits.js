@@ -10,9 +10,6 @@ import firebase from 'firebase/app';
 import 'firebase/firestore';
 const db = firebaseApp.firestore(firebaseApp);
 
-function preventDefault(event) {
-  event.preventDefault();
-}
 
 const useStyles = makeStyles({
   depositContext: {
@@ -117,8 +114,8 @@ export default function Deposits({numero,esdinero,titulo, fechaMaster, botonMast
    
   return (
     <React.Fragment>
-      <Title>{titulo}</Title>
-      <Typography component="p" variant="h4">
+      <Title style={{color: '#ffa323'}}>{titulo}</Title>
+      <Typography component="p" variant="h4" >
         {(esdinero === true ? '$' : '')+ numero}
       </Typography>
       {fechaMaster && <Typography color="textSecondary" className={classes.depositContext}>

@@ -37,7 +37,7 @@ const [datosFireBase, setDatosFirebase] = useState([])
       { title: '#Folio', field: 'name' },
       {title: 'Fecha', field: 'fecha'},
       { title: 'Nombre del cliente', field: 'surname' },
-      { title: '#Llantas', field: 'birthYear'},
+      { title: 'Ejemplo', field: 'birthYear'},
       {title: 'Pago', field: 'pago',  }
       
     ],
@@ -125,7 +125,7 @@ const [datosFireBase, setDatosFirebase] = useState([])
     </FormControl>
         </Grid>
         <Grid item style={{margin:'auto'}}>
-        <Button variant="contained" color="primary" onClick={traerDocumentos}>
+        <Button variant="contained" color="primary" onClick={traerDocumentos} style={{background:'#ffa323'}}>
         Buscar Clientes
       </Button>
       </Grid>

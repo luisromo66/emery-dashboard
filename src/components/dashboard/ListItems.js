@@ -6,14 +6,20 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ListSubheader from '@material-ui/core/ListSubheader';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import InboxIcon from '@material-ui/icons/Inbox';
+import SearchIcon from '@material-ui/icons/Search';
+import FavoriteIcon from '@material-ui/icons/Favorite';
 import PeopleIcon from '@material-ui/icons/People';
+import LocalHospitalIcon from '@material-ui/icons/LocalHospital';
 import BarChartIcon from '@material-ui/icons/BarChart';
+
 import { makeStyles } from '@material-ui/core/styles';
 import Avatar from '@material-ui/core/Avatar';
 import Fade from '@material-ui/core/Fade';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
-import taka from '../../ferny-llantas.jpg';
+import Tooltip from '@material-ui/core/Tooltip';
+import peter from '../../peter.jpg';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -23,12 +29,11 @@ const useStyles = makeStyles((theme) => ({
     height: theme.spacing(3),
   },
   large: {
-    width: 170,
-    height: 42,
+    width: theme.spacing(14),
+    height: theme.spacing(14),
     marginLeft: 'auto',
     marginRight: 'auto',
     marginTop:20
-    
     
   },
   
@@ -43,15 +48,18 @@ export default function ListItems({open}){
     
   <div>
     <Fade in={open}>
-      <Avatar  className={classes.large} src={taka}  variant="rounded" />
+      <Avatar  className={classes.large} src={peter} />
       </Fade>
       <Fade in={open}>
       <Typography component="div">
       <Box textAlign="center" fontSize={12} m={1} style={{marginBottom:20}}>
-        Fernando Fernandez
+      Juan Carlos Garfias
       </Box>
       </Typography>
       </Fade>
+
+       
+      <Tooltip title="Inicio" placement="right" disableHoverListener={open}>
     <ListItem button onClick={()=>{
           history.push('/dashboard');
       }} >
@@ -60,26 +68,95 @@ export default function ListItems({open}){
       </ListItemIcon>
       <ListItemText primary='Inicio'  />
     </ListItem>
-    <ListItem button  onClick={()=>{history.push('/dashboard/crear-recibo')}} >
-      <ListItemIcon>
-        <ShoppingCartIcon />
-      </ListItemIcon>
-      <ListItemText primary="Crear Recibos" />
-    </ListItem>
+    </Tooltip>
+    
+
+
+    
+
+
+    <Tooltip title="Clientes" placement="right" disableHoverListener={open}>
     <ListItem  button onClick={()=>{ history.push('/dashboard/clientes')}}>
       <ListItemIcon>
         <PeopleIcon />
       </ListItemIcon>
       <ListItemText primary="Clientes" />
     </ListItem >
+    </Tooltip>
+
+
+
+    
+  
+    <Tooltip title="Todas" placement="right" disableHoverListener={open}>
+    <ListItem button onClick={()=>{
+          history.push('/dashboard/estadisticas');
+      }} >
+      <ListItemIcon>
+        <InboxIcon/>
+      </ListItemIcon>
+      <ListItemText primary="Todas"  />
+    </ListItem>
+    </Tooltip>
+
+    <Tooltip title="Pendientes" placement="right" disableHoverListener={open}>
+    <ListItem button onClick={()=>{
+          history.push('/dashboard/estadisticas');
+      }} >
+      <ListItemIcon>
+        <InboxIcon/>
+      </ListItemIcon>
+      <ListItemText primary="Pendientes"  />
+    </ListItem>
+    </Tooltip>
+
+    <Tooltip title="Respondidas" placement="right" disableHoverListener={open}>
+    <ListItem button onClick={()=>{
+          history.push('/dashboard/estadisticas');
+      }} >
+      <ListItemIcon>
+        <InboxIcon/>
+      </ListItemIcon>
+      <ListItemText primary="Respondidas"  />
+    </ListItem>
+    </Tooltip>
+
+    <Tooltip title="No interesa" placement="right" disableHoverListener={open}>
+    <ListItem button onClick={()=>{
+          history.push('/dashboard/estadisticas');
+      }} >
+      <ListItemIcon>
+        <InboxIcon/>
+      </ListItemIcon>
+      <ListItemText primary="No interesa"  />
+    </ListItem>
+    </Tooltip>
+
+    <Tooltip title="Contratadas" placement="right" disableHoverListener={open} >
+    <ListItem button onClick={()=>{
+          history.push('/dashboard/estadisticas');
+      }} >
+      <ListItemIcon>
+        <InboxIcon />
+      </ListItemIcon>
+      <ListItemText primary="Contratadas"  />
+    </ListItem>
+    </Tooltip>
+
+   
+   
+
+
+    <Tooltip title="Estadisticas" placement="right" disableHoverListener={open} >
     <ListItem button onClick={()=>{
           history.push('/dashboard/estadisticas');
       }} >
       <ListItemIcon>
         <BarChartIcon />
       </ListItemIcon>
-      <ListItemText primary="Estadisticas"  />
+      <ListItemText primary="Ordenes Manuales"  />
     </ListItem>
+    </Tooltip>
   
   </div>
     );

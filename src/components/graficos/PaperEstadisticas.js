@@ -287,81 +287,52 @@ const useStyles = makeStyles((theme) => ({
       
         <Grid container spacing={3}>
       
-    <Grid item xs={6}>
-    <Paper elevation={3} >
-        <BarMaster
-           dataMaster={dataEfectivo}
-           etiqueta={etiquetaVentas}
-        />
-        <Typography component="div">
-      <Box textAlign="center" fontSize={30} m={1} style={{marginBottom:40}}>
-     Ventas del año 2220
-      </Box>
-      </Typography>
-    
-    </Paper>
-    </Grid>
-    <Grid item xs={6}>
-    <Paper elevation={3} >
+       {/*ESTADISTICAS CARDS */}
+        <Grid item xs={6} >
+    <Paper elevation={3} style={{padding:25}}>
     <CurvaGrafico
       dataMaster={dataEfectivo}
       etiqueta={etiquetaVentas}
     />
     <Typography component="div">
-      <Box textAlign="center" fontSize={30} m={1} style={{marginBottom:40}}>
-         Ventas del año 2220
+      <Box textAlign="center" fontSize={25} m={1} >
+         Ingresos 
       </Box>
       </Typography>
     </Paper>
     </Grid>
-    <Grid item xs={6}>
-    <Paper elevation={3} >
-        <BarMaster
-        dataMaster={dataLlantas}
-        etiqueta={etiquetaLlantas}
-        />
-        <Typography component="div">
-      <Box textAlign="center" fontSize={30} m={1} style={{marginBottom:40}}>
-      Numero de Llantas vendidas del año 2220
-      </Box>
-      </Typography>
-    
-    </Paper>
-    </Grid>
-    <Grid item xs={6}>
-    <Paper elevation={3} >
+  
+        <Grid item xs={6}>
+    <Paper elevation={3} style={{padding:25}} >
     <CurvaGrafico
-    dataMaster={dataLlantas}
-    etiqueta={etiquetaLlantas}
+      dataMaster={dataEfectivo}
+      etiqueta={etiquetaVentas}
     />
     <Typography component="div">
-      <Box textAlign="center" fontSize={30} m={1} style={{marginBottom:40}}>
-         Numero de Llantas vendidas del año 2220
+      <Box textAlign="center" fontSize={25} m={1} >
+       Arboles plantados 
       </Box>
       </Typography>
     </Paper>
     </Grid>
-    <Grid item xs={6}>
-    <Paper elevation={3} >
-    <DougnutMaster dataMaster={dataLlantas}/>
+        
+        <Grid item xs={12} style={{marginBottom:30}}>
+    <Paper elevation={3} style={{padding:25}}  >
+    <CurvaGrafico
+      dataMaster={dataEfectivo}
+      etiqueta={etiquetaVentas}
+    />
     <Typography component="div">
-      <Box textAlign="center" fontSize={30} m={1} style={{marginBottom:40}}>
-         Llantas vendidas
+      <Box textAlign="center" fontSize={25} m={1} >
+         Nuevos Clientes del 2020
       </Box>
       </Typography>
     </Paper>
     </Grid>
-    <Grid item xs={6}>
-    <Paper elevation={3} >
-    <DougnutMaster     dataMaster={dataEfectivo}/>
-    <Typography component="div">
-      <Box textAlign="center" fontSize={30} m={1} style={{marginBottom:40}}>
-         Ventas
-      </Box>
-      </Typography>
-    </Paper>
-    </Grid>
-    <Backdrop className={classes.backdrop} open={open} >
+  
+   
+     {/* */}
+    <Backdrop className={classes.backdrop} open={false} >
     <CircularProgress color="inherit" />
   </Backdrop>
     

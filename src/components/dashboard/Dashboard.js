@@ -43,6 +43,7 @@ const useStyles = makeStyles((theme) => ({
   },
   toolbar: {
     paddingRight: 24, // keep right padding when drawer closed
+    backgroundColor: '#333'
   },
   toolbarIcon: {
     display: 'flex',
@@ -346,7 +347,7 @@ export default function Dashboard({palabra}) {
             <MenuIcon />
           </IconButton>
           <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
-            Ferny Llantas
+            Mudanzas Gana Dashboard
           </Typography>
           <IconButton color="inherit">
             <Badge badgeContent={4} color="secondary">
@@ -377,63 +378,65 @@ export default function Dashboard({palabra}) {
          {palabra === 'dashboard' ? <Container maxWidth="lg" className={classes.container}>
           <Grid container spacing={3}>
             {/* Chart */}
-            <Grid item xs={12} md={8} lg={9}>
-              <Paper className={fixedHeightPaper}>
-                <Chart />
-              </Paper>
-            </Grid>
+           
             {/* Recent Deposits */}
             <Grid item xs={12} md={4} lg={3}>
               <Paper className={fixedHeightPaper}>
                 <Deposits 
                   fechaMaster={true}
-                  numero={parseFloat(localStorage.getItem('dineroHoy')).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}
-                  esdinero={true}
-                  titulo='Ventas de hoy'
-                  fecha={fechaActual}
+                  numero={0}
+                  titulo='Todas'
+                />
+              </Paper>
+            </Grid>
+            <Grid item xs={12} md={4} lg={3}>
+              <Paper className={fixedHeightPaper}>
+              <Deposits 
+                  numero={0}
+                  titulo='Pendientes'
+                />
+              </Paper>
+            </Grid>
+            <Grid item xs={12} md={4} lg={3}>
+              <Paper className={fixedHeightPaper}>
+              <Deposits 
+                  numero={0}
+                  titulo='Respondidas'
+                />
+              </Paper>
+            </Grid>
+            <Grid item xs={12} md={4} lg={3}>
+              <Paper className={fixedHeightPaper}>
+              <Deposits 
+                  numero={0}
+                  titulo='No interesa'
+                />
+              </Paper>
+            </Grid>
 
-                />
-              </Paper>
-            </Grid>
             <Grid item xs={12} md={4} lg={3}>
               <Paper className={fixedHeightPaper}>
-                <Deposits
-                    fechaMaster={true}
-                    numero={localStorage.getItem('llantasAyer')}
-                    esdinero={false}
-                    titulo='#Llantas vendidas ayer'
-                    fecha={localStorage.getItem('fechaAnterior')}
+              <Deposits 
+                  numero={0}
+                  titulo='Contratadas'
                 />
               </Paper>
             </Grid>
+
             <Grid item xs={12} md={4} lg={3}>
               <Paper className={fixedHeightPaper}>
-                <Deposits
-                   fechaMaster={true}
-                   numero={localStorage.getItem('llantasHoy')}
-                   esdinero={false}
-                   titulo='#Llantas vendidas hoy'
-                   fecha={fechaActual}
+              <Deposits 
+                  numero={0}
+                  titulo='Canceladas'
                 />
               </Paper>
             </Grid>
-            <Grid item xs={12} md={4} lg={3}>
-              <Paper className={fixedHeightPaper}>
-                <Deposits
-                  fechaMaster={true}
-                  numero={parseFloat(localStorage.getItem('dineroAyer')).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}
-                  esdinero={true}
-                  titulo='Ventas de Ayer'
-                  fecha={localStorage.getItem('fechaAnterior')}
-                />
-              </Paper>
-            </Grid>
+
+          
+
+            <PaperEstadisticas/>
             {/* Recent Orders */}
-            <Grid item xs={12}>
-              
-                <TablaClientes/>
-              
-            </Grid>
+           
           </Grid>
          
         </Container> : palabra === 'recibo'? <CrearRecibo/> : palabra === 'clientes'? <Grid item xs={12}>
@@ -442,7 +445,7 @@ export default function Dashboard({palabra}) {
             
           </Grid>
         :
-         <PaperEstadisticas/>
+         <TablaClientes/>
 }
       </main>
     </div>
