@@ -27,6 +27,8 @@ import Chart from './Chart';
 import Deposits from './Deposits';
 import Orders from './Orders';
 import TablaClientesBaseDatos from './TablaClientesBaseDatos';
+import Loading from '../Ui/Loading';
+import { useHistory } from "react-router-dom";
 import TablaClientes from './TablaClientes';
 import {firebaseApp} from '../FireBase';
 import firebase from 'firebase/app';
@@ -120,21 +122,24 @@ const useStyles = makeStyles((theme) => ({
 export default function Dashboard({palabra}) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
+  const [activadorLoading, setActivadorLoading] = useState(false);
+  const [triggerCarga, setTriggerCarga] = useState(false);
+  const [usuarioFirebase, setUsuarioFirebase] = useState('');
+
+  let router = useHistory();
 
   const [datosEstadisticos, setDatosEstadisticos] = useState({
-    efectivoHoy: 0,
-    efectivoAyer: 0,
-    llantasHoy: 0,
-    llantasAyer: 0,
+    todas: 0,
+    respondidas: 0,
+    pendientes: 0,
+    noInteresa: 0,
+    contratadas: 0,
+    canceladas: 0,
+
   });
 
   
-    let fecha = new Date();
-    let dia = fecha.getDate();
-    let mes = fecha.getMonth()+1;
-    let año = fecha.getFullYear();
-
-    let fechaActual = (dia === 1 ?'0': dia === 2 ?'0':dia === 3 ?'0': dia === 4 ?'0': dia === 5 ?'0':dia === 6 ?'0':dia === 7 ?'0':dia === 8 ?'0': dia === 9 ?'0':'')+dia+'/'+(mes === 10 ? '': mes === 11 ? '': mes === 12 ? '': '0') +mes+'/'+año;
+    
     
 
 
@@ -146,191 +151,52 @@ export default function Dashboard({palabra}) {
   };
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
-  const llantassContext = useContext(llantasContext);
-  const {cargarPagina, ejemploPrueba, funcionEjemplo, dinerohoy, dinerohyer} = llantassContext;
+  
 
  
   useEffect(()=>{
 
-   
-     
-   
-      
-      function time() {
-  
-        var d = new Date();
-        var s = d.getSeconds();
-        var m = d.getMinutes();
-        var h = d.getHours();
-  
-        if(h===9){
-          localStorage.setItem("9", localStorage.getItem("dineroHoy"));
-        }
-        if(h===10){
-          localStorage.setItem("10", localStorage.getItem("dineroHoy"));
-        }
-        if(h===11){
-          localStorage.setItem("11", localStorage.getItem("dineroHoy"));
-        }
-        if(h===12){
-          localStorage.setItem("12", localStorage.getItem("dineroHoy"));
-        }
-        if(h===13){
-          localStorage.setItem("13", localStorage.getItem("dineroHoy"));
-        }
-        if(h===14){
-          localStorage.setItem("14", localStorage.getItem("dineroHoy"));
-        }
-        if(h===15){
-          localStorage.setItem("15", localStorage.getItem("dineroHoy"));
-        }
-        if(h===16){
-          localStorage.setItem("16", localStorage.getItem("dineroHoy"));
-        }
-        if(h===17){
-          localStorage.setItem("17", localStorage.getItem("dineroHoy"));
-        }
-        if(h===18){
-          localStorage.setItem("18", localStorage.getItem("dineroHoy"));
-        }
-        if(h===19){
-          localStorage.setItem("19", localStorage.getItem("dineroHoy"));
-        }
-        if(h===20){
-          localStorage.setItem("20", localStorage.getItem("dineroHoy"));
-        }
-      
-      }
-      
-      setInterval(time, 1000);
+    
     
 
-
-
-    firebase.auth().onAuthStateChanged(userInfo =>{
-      console.log(userInfo.email);  //MEGA MASTER: esta funcion te sirve para decirte si esta logueado o no
-
-      if(localStorage.getItem('fechaAnterior') && localStorage.getItem('fechaActual')){
-
+    (async()=>{
+       await firebase.auth().onAuthStateChanged(usuario=>{
+        if(!usuario){
+          router.push('/');
+        }else{
+          setUsuarioFirebase(usuario.email);
         
-       if(fechaActual === localStorage.getItem('fechaActual')){
-
-            console.log('Son iguales');
-
-           }
-            
-           //Nuevo Dia
-           if(fechaActual !== localStorage.getItem('fechaActual')){
-
-           (async()=>{
-
-            const datos = await db.collection('estadisticas').doc(mes.toString());
-
-            
-
-             await datos.get().then((doc)=>{
-
-            let dinerototal = localStorage.getItem('dineroHoy');
-            let llantastotal = localStorage.getItem('llantasHoy');
-
-        
-
-            const efectivo = doc.data().efectivo+=parseInt(dinerototal)
-            const efectivo1 = doc.data().efectivo1+=parseInt(dinerototal)
-            const efectivoBase = doc.data().efectivoBase+=parseInt(dinerototal)
-            const llantas = doc.data().llantas+=parseInt(llantastotal)
-            const llantas1 = doc.data().llantas1+=parseInt(llantastotal)
-            const llantasBase = doc.data().llantasBase+=parseInt(llantastotal)
-
-            if(userInfo.email === 'luistlaquepaque@gmail.com' || userInfo.email === 'ffernandezg1521@hotmail.com' || userInfo.email === 'fernys58@hotmail.com' || userInfo.email === 'campechano2231@gmail.com'){
-
-              datos.update({efectivo,efectivoBase,llantas,llantasBase}).then(()=>{
-                for(let i = 9; i <=20; i++){
-                  localStorage.setItem(`${i}`,0)
-                }
-                localStorage.setItem('dineroAyer', localStorage.getItem('dineroHoy'));
-                localStorage.setItem('llantasAyer',  localStorage.getItem('llantasHoy'));
-                localStorage.setItem('dineroHoy', 0);
-                localStorage.setItem('llantasHoy', 0);
-                localStorage.setItem('fechaAnterior', localStorage.getItem('fechaActual'));
-                localStorage.setItem('fechaActual', fechaActual);
-                localStorage.setItem('arrayHoy', '[]');
-                            
-              })
-    
-            }
-
-            if(userInfo.email === 'ivettemiazoe@gmail.com'){
-               
-              for(let i = 9; i <=20; i++){
-                localStorage.setItem(`${i}`,0)
-              }
-              datos.update({efectivo1,efectivoBase,llantas1,llantasBase}).then(()=>{
-                localStorage.setItem('dineroAyer', localStorage.getItem('dineroHoy'));
-                localStorage.setItem('llantasAyer',  localStorage.getItem('llantasHoy'));
-                localStorage.setItem('dineroHoy', 0);
-                localStorage.setItem('llantasHoy', 0);
-                localStorage.setItem('fechaAnterior', localStorage.getItem('fechaActual'));
-                localStorage.setItem('fechaActual', fechaActual);
-                localStorage.setItem('arrayHoy', '[]');
-                            
-              })
-      
-              
-            }
-            
-
-                
-
-           })
-
-           })()
-          
-      
-            
-      
-         
-
-
-            
-
-          //  (async()=>{
-
-          //    const datos = await db.collection('estadisticas').doc(mes);
-            //  await datos.get().then((doc)=>{
-                
-
-           //   })
-
-
-            //  })
-
-          //  })()
-
-           }
-
-      }else{
-        //PRIMERA VEZ QUE SE USA
-        for(let i = 9; i <=20; i++){
-          localStorage.setItem(`${i}`,0)
         }
-        localStorage.setItem('fechaActual', fechaActual);
-        localStorage.setItem('fechaAnterior', (dia === 1 ?'0': dia === 2 ?'0':dia === 3 ?'0': dia === 4 ?'0': dia === 5 ?'0': dia === 6 ?'0':dia === 7 ?'0':dia === 8 ?'0': dia === 9 ?'0':'')+(dia-1)+'/'+(mes === 10 ? '': mes === 11 ? '': mes === 12 ? '': '0') +mes+'/'+año);
-        localStorage.setItem('dineroHoy', 0);
-        localStorage.setItem('dineroAyer', 0);
-        localStorage.setItem('llantasHoy', 0);
-        localStorage.setItem('llantasAyer', 0);
-        localStorage.setItem('arrayHoy', '[]');
-      }
-
-     
-      
-  })
-
-    console.log(palabra);  
+      } )
 
 
-  },[cargarPagina])
+       setActivadorLoading(true);
+      const datos = await db.collection('datosGenerales').doc('LwBPHDbibuKc2Xi7j9q6');
+
+      await datos.get().then((datos)=>{
+
+        const doc = datos.data();
+        setDatosEstadisticos({
+          ...datosEstadisticos,
+          ['todas']: doc.todas,
+          ['respondidas']: doc.respondidas,
+          ['pendientes']: doc.pendientes,
+          ['noInteresa']: doc.noInteresa,
+          ['contratadas']: doc.contratadas,
+          ['canceladas']: doc.canceladas
+        }
+          )
+       setActivadorLoading(false);
+
+      }).catch(()=>{
+        setActivadorLoading(false);
+      })
+
+
+
+    })()
+
+  },[])
 
   return (
     <div className={classes.root}>
@@ -369,7 +235,7 @@ export default function Dashboard({palabra}) {
           </IconButton>
         </div>
         <Divider />
-        <List><ListItems open={open}/></List>
+        <List><ListItems open={open} triggerCarga={triggerCarga} setTriggerCarga={setTriggerCarga} usuario={usuarioFirebase}/></List>
         <Divider />
         
       </Drawer>
@@ -379,73 +245,60 @@ export default function Dashboard({palabra}) {
           <Grid container spacing={3}>
             {/* Chart */}
            
-            {/* Recent Deposits */}
+            {/* Todas */}
             <Grid item xs={12} md={4} lg={3}>
               <Paper className={fixedHeightPaper}>
                 <Deposits 
                   fechaMaster={true}
-                  numero={0}
+                  numero={datosEstadisticos.todas}
                   titulo='Todas'
                 />
               </Paper>
             </Grid>
+
+             {/* Pendientes */}
             <Grid item xs={12} md={4} lg={3}>
               <Paper className={fixedHeightPaper}>
               <Deposits 
-                  numero={0}
+                  numero={datosEstadisticos.pendientes}
                   titulo='Pendientes'
                 />
               </Paper>
             </Grid>
-            <Grid item xs={12} md={4} lg={3}>
-              <Paper className={fixedHeightPaper}>
-              <Deposits 
-                  numero={0}
-                  titulo='Respondidas'
-                />
-              </Paper>
-            </Grid>
-            <Grid item xs={12} md={4} lg={3}>
-              <Paper className={fixedHeightPaper}>
-              <Deposits 
-                  numero={0}
-                  titulo='No interesa'
-                />
-              </Paper>
-            </Grid>
 
+             
+
+            
+
+               {/* Contratadas */}
             <Grid item xs={12} md={4} lg={3}>
               <Paper className={fixedHeightPaper}>
               <Deposits 
-                  numero={0}
+                  numero={datosEstadisticos.contratadas}
                   titulo='Contratadas'
                 />
               </Paper>
             </Grid>
 
-            <Grid item xs={12} md={4} lg={3}>
-              <Paper className={fixedHeightPaper}>
-              <Deposits 
-                  numero={0}
-                  titulo='Canceladas'
-                />
-              </Paper>
-            </Grid>
+         
 
           
 
             <PaperEstadisticas/>
             {/* Recent Orders */}
-           
+            
           </Grid>
-         
+          <Loading activadorLoading={activadorLoading}/>
         </Container> : palabra === 'recibo'? <CrearRecibo/> : palabra === 'clientes'? <Grid item xs={12}>
               
               <TablaClientesBaseDatos/>
             
-          </Grid>
-        :
-         <TablaClientes/>
+          </Grid> :
+      palabra === 'ordenes-manuales'? <TablaClientes/> :
+      palabra === 'todas'? <TablaClientes palabra='todas'  triggerCarga={triggerCarga} setTriggerCarga={setTriggerCarga}/> :
+      palabra === 'pendientes'? <TablaClientes palabra='pendientes'  triggerCarga={triggerCarga} setTriggerCarga={setTriggerCarga}/> :
+      <TablaClientes palabra='contratadas'  triggerCarga={triggerCarga} setTriggerCarga={setTriggerCarga}/> 
+         
 }
       </main>
     </div>

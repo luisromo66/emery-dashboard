@@ -1,9 +1,10 @@
-import React,{useState, useEffect} from 'react';
+import React,{useState, useEffect, useContext} from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import Backdrop from '@material-ui/core/Backdrop';
+import logoGana from '../LOGO-GANA-.png';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Alert from '@material-ui/lab/Alert';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
@@ -12,8 +13,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import firebase from 'firebase/app';
 import 'firebase/auth';
-
-
 
 
 
@@ -41,6 +40,9 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(3, 0, 2),
    
   },
+  multilineColor:{
+    color:'red'
+}
 }));
 
 export default function InicioLogin(props) {
@@ -97,9 +99,7 @@ export default function InicioLogin(props) {
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
-        </Avatar>
+        <img src={logoGana} style={{width:160, height:160}}></img>
         <Typography component="h1" variant="h5" style={{paddingBottom:10 }}>
           Iniciar Sesion
         </Typography>
@@ -116,6 +116,7 @@ export default function InicioLogin(props) {
             autoComplete="email"
             autoFocus
             onChange={onChange}
+           
           />
           <TextField
             variant="outlined"
@@ -134,9 +135,8 @@ export default function InicioLogin(props) {
             type="submit"
             fullWidth
             variant="contained"
-            color="primary"
+            style={{background:'#ffa323', marginTop:20, color: 'white'}}
             className={classes.submit}
-            style={{marginTop:20}}
           >
             Iniciar Sesion
           </Button>

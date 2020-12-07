@@ -15,12 +15,11 @@ function App() {
       <Route exact path='/' component={InicioLogin}/>
       <Route exact path='/' component={InicioLogin}/>
       <Route exact path='/dashboard' render={(props)=> <Dashboard {...props} palabra='dashboard'/>}/>
-      <Route exact path='/dashboard/estadisticas' render={(props)=> <Dashboard {...props} palabra='estadisticas'/>}/>
+      <Route exact path='/dashboard/ordenes-manuales' render={(props)=> <Dashboard {...props} palabra='ordenes-manuales'/>}/>
       <Route exact path='/dashboard/clientes' render={(props)=> <Dashboard {...props} palabra='clientes'/>}/>
       <Route exact path='/dashboard/todas' render={(props)=> <Dashboard {...props} palabra='todas'/>}/>
       <Route exact path='/dashboard/pendientes' render={(props)=> <Dashboard {...props} palabra='pendientes'/>}/>
-      <Route exact path='/dashboard/respondidas' render={(props)=> <Dashboard {...props} palabra='respondidas'/>}/>
-      <Route exact path='/dashboard/no-interesa' render={(props)=> <Dashboard {...props} palabra='contratadas'/>}/>
+      <Route exact path='/dashboard/contratadas' render={(props)=> <Dashboard {...props} palabra='contratadas'/>}/>
       <Route exact path='/dashboard/crear-recibo/imprimir' component={Imprimir}/>
       <Route exact path='/dashboard/kiki' component={CrearRecibo}/>
     </Switch>

@@ -46,15 +46,22 @@ const useStyles = makeStyles((theme) => ({
   
 
   const PaperEstadisticas = () => {
-
+   
+    {/*Vector Ingresos*/}
    const [dataEfectivo, setDataEfectivo] = useState([]);
+
+    {/*Vector Arboles*/}
+    const [dataArboles, setDataArboles] = useState([]);
+
+     {/*Vector Clientes nuevos*/}
+   const [dataClientes, setDataClientes] = useState([]);
+
     const [dataLlantas, setDataLlantas] = useState();
     const [etiquetaSucursales, setEtiquetaSucursales] = useState('');
     const [esMaster, setEsMaster] = useState(false);
     const [open, setOpen] = useState(false);
 
-    const etiquetaVentas = 'Ventas del mes señalado';
-    const etiquetaLlantas = 'Llantas vendidas';
+    const etiquetaVentas = 'Cantidad';
 
 
     useEffect(()=>{
@@ -62,114 +69,35 @@ const useStyles = makeStyles((theme) => ({
     
 
          let datosEfectivoFirebase = [];
-         let datosLlantasFirebase = [];
+         let datosArbolesFirebase = [];
+         let datosClientesNuevosFirebase = [];
 
-          setOpen(true);
-         firebase.auth().onAuthStateChanged(userInfo =>{
-
-          if(userInfo.email === 'ffernandezg1521@hotmail.com' || userInfo.email === 'fernys58@hotmail.com'){
-            setEsMaster(true);
-          }
-
-          if(userInfo.email === 'luistlaquepaque@gmail.com' || userInfo.email === 'ffernandezg1521@hotmail.com' || userInfo.email === 'fernys58@hotmail.com'){
-
-
-
+        //  setOpen(true);
             (async()=>{
 
-              await db.collection('estadisticas').orderBy("numeromes", "asc").get().then((querySnapshot)=>{
+              await db.collection('estadisticas').orderBy("numeroMes", "asc").get().then((querySnapshot)=>{
 
                 querySnapshot.forEach((doc)=>{
-                   datosEfectivoFirebase.push(doc.data().efectivo);
-                   datosLlantasFirebase.push(doc.data().llantas);
+                   datosEfectivoFirebase.push(doc.data().dineroMes);
+                   datosArbolesFirebase.push(doc.data().arboles);
+                   datosClientesNuevosFirebase.push(doc.data().clientesNuevos);
                 })
       
       
               });
-
+              console.log(datosArbolesFirebase);
+              setDataArboles(datosArbolesFirebase);
+              setDataClientes(datosClientesNuevosFirebase);
               setDataEfectivo(datosEfectivoFirebase);
-              setDataLlantas(datosLlantasFirebase);
-              setOpen(false);
+              //setOpen(false);
 
 
               
 
             })()
 
-            
-    
-          }
-    
-          if(userInfo.email === 'ivettemiazoe@gmail.com'){
 
 
-            (async()=>{
-
-              await db.collection('estadisticas').orderBy("numeromes", "asc").get().then((querySnapshot)=>{
-
-                querySnapshot.forEach((doc)=>{
-                   datosEfectivoFirebase.push(doc.data().efectivo1);
-                   datosLlantasFirebase.push(doc.data().llantas1);
-                })
-      
-      
-              });
-
-              setDataEfectivo(datosEfectivoFirebase);
-              setDataLlantas(datosLlantasFirebase);
-              setOpen(false);
-
-
-            })()
-
-
-    
-           
-    
-          }
-          if(userInfo.email === 'campechano2231@gmail.com'){
-            
-
-
-            (async()=>{
-
-              await db.collection('estadisticas').orderBy("numeromes", "asc").get().then((querySnapshot)=>{
-
-                querySnapshot.forEach((doc)=>{
-                   console.log('$'+(doc.data().efectivoBase).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-                   datosEfectivoFirebase.push(doc.data().efectivoBase);
-                   datosLlantasFirebase.push(doc.data().llantasBase);
-                })
-
-                
-      
-      
-              });
-
-              setDataEfectivo(datosEfectivoFirebase);
-              setDataLlantas(datosLlantasFirebase);
-              setOpen(false);
-
-
-            })()
-    
-           
-    
-          }
-
-          
-         })
-
-    
-
-        
-
-        
-         
-
-           
-
-    
 
     },[])
 
@@ -287,8 +215,8 @@ const useStyles = makeStyles((theme) => ({
       
         <Grid container spacing={3}>
       
-       {/*ESTADISTICAS CARDS */}
-        <Grid item xs={6} >
+       {/*Ingresos */}
+        <Grid item xs={12} >
     <Paper elevation={3} style={{padding:25}}>
     <CurvaGrafico
       dataMaster={dataEfectivo}
@@ -302,10 +230,13 @@ const useStyles = makeStyles((theme) => ({
     </Paper>
     </Grid>
   
-        <Grid item xs={6}>
+
+         {/*Arboles plantados */}
+
+        <Grid item xs={12} style={{marginBottom:30}}>
     <Paper elevation={3} style={{padding:25}} >
     <CurvaGrafico
-      dataMaster={dataEfectivo}
+      dataMaster={dataArboles}
       etiqueta={etiquetaVentas}
     />
     <Typography component="div">
@@ -316,19 +247,8 @@ const useStyles = makeStyles((theme) => ({
     </Paper>
     </Grid>
         
-        <Grid item xs={12} style={{marginBottom:30}}>
-    <Paper elevation={3} style={{padding:25}}  >
-    <CurvaGrafico
-      dataMaster={dataEfectivo}
-      etiqueta={etiquetaVentas}
-    />
-    <Typography component="div">
-      <Box textAlign="center" fontSize={25} m={1} >
-         Nuevos Clientes del 2020
-      </Box>
-      </Typography>
-    </Paper>
-    </Grid>
+     
+        
   
    
      {/* */}
