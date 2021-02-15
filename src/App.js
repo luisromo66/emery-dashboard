@@ -1,30 +1,26 @@
 import React from 'react';
 import InicioLogin from './components/InicioLogin';
 import Dashboard from './components/dashboard/Dashboard';
-import LlantasState from './context/llantasState';
-import CrearRecibo from './components/dashboard/CrearRecibo';
-import Imprimir from './components/dashboard/Imprimir';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 
 
 function App() {
   return (
-    <LlantasState>
   <Router>
     <Switch>
       <Route exact path='/' component={InicioLogin}/>
-      <Route exact path='/' component={InicioLogin}/>
       <Route exact path='/dashboard' render={(props)=> <Dashboard {...props} palabra='dashboard'/>}/>
-      <Route exact path='/dashboard/ordenes-manuales' render={(props)=> <Dashboard {...props} palabra='ordenes-manuales'/>}/>
-      <Route exact path='/dashboard/clientes' render={(props)=> <Dashboard {...props} palabra='clientes'/>}/>
-      <Route exact path='/dashboard/todas' render={(props)=> <Dashboard {...props} palabra='todas'/>}/>
-      <Route exact path='/dashboard/pendientes' render={(props)=> <Dashboard {...props} palabra='pendientes'/>}/>
-      <Route exact path='/dashboard/contratadas' render={(props)=> <Dashboard {...props} palabra='contratadas'/>}/>
-      <Route exact path='/dashboard/crear-recibo/imprimir' component={Imprimir}/>
-      <Route exact path='/dashboard/kiki' component={CrearRecibo}/>
+      <Route exact path='/dashboard/maquinas-de-helado-duro' render={(props)=> <Dashboard {...props} palabra='maquinas-de-helado-duro'/>}/>
+      <Route exact path='/dashboard/maquinas-de-helado-suave' render={(props)=> <Dashboard {...props} palabra='maquinas-de-helado-suave'/>}/>
+      <Route exact path='/dashboard/maquinas-paleteras' render={(props)=> <Dashboard {...props} palabra='maquinas-paleteras'/>}/>
+      <Route exact path='/dashboard/bases-para-helado' render={(props)=> <Dashboard {...props} palabra='bases-para-helado'/>}/>
+      <Route exact path='/dashboard/otros-y-accesorios' render={(props)=> <Dashboard {...props} palabra='otros-y-accesorios'/>}/>
+      <Route exact path='/dashboard/slider' render={(props)=> <Dashboard {...props} palabra='slider'/>}/>
+      <Route exact path='/dashboard/recetas' render={(props)=> <Dashboard {...props} palabra='recetas'/>}/>
+
+      
     </Switch>
   </Router>
-  </LlantasState>
   );
 }
 

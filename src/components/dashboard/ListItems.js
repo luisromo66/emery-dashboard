@@ -1,11 +1,10 @@
-import React,{useEffect} from 'react';
+import React from 'react';
 import { useHistory } from "react-router-dom";
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import InboxIcon from '@material-ui/icons/Inbox';
-import PeopleIcon from '@material-ui/icons/People';
 import { makeStyles } from '@material-ui/core/styles';
 import Avatar from '@material-ui/core/Avatar';
 import Fade from '@material-ui/core/Fade';
@@ -69,69 +68,90 @@ export default function ListItems({open, triggerCarga, setTriggerCarga, usuario}
       </Box>
       </Typography>
       </Fade>
-
        
-      <Tooltip title="Inicio" placement="right" disableHoverListener={open}>
+    <Tooltip title="M. Helado Duro" placement="right" disableHoverListener={open} >
     <ListItem button onClick={()=>{
-          history.push('/dashboard');
-      }} >
-      <ListItemIcon>
-        <DashboardIcon />
-      </ListItemIcon>
-      <ListItemText primary='Inicio'  />
-    </ListItem>
-    </Tooltip>
-    
-
-
-    
-
-
- 
-
-
-    
-  
-    <Tooltip title="Todas" placement="right" disableHoverListener={open}>
-    <ListItem button onClick={()=>{
-          history.push('/dashboard/todas');
-          setTriggerCarga(!triggerCarga);
-      }} >
-      <ListItemIcon>
-        <InboxIcon/>
-      </ListItemIcon>
-      <ListItemText primary="Todas"  />
-    </ListItem>
-    </Tooltip>
-
-    <Tooltip title="Pendientes" placement="right" disableHoverListener={open}>
-    <ListItem button onClick={()=>{
-          history.push('/dashboard/pendientes');
-          setTriggerCarga(!triggerCarga);
-      }} >
-      <ListItemIcon>
-        <InboxIcon/>
-      </ListItemIcon>
-      <ListItemText primary="Pendientes"  />
-    </ListItem>
-    </Tooltip>
-
-  
-
-    
-
-    <Tooltip title="Contratadas" placement="right" disableHoverListener={open} >
-    <ListItem button onClick={()=>{
-          history.push('/dashboard/contratadas');
+          history.push('/dashboard/maquinas-de-helado-duro');
           setTriggerCarga(!triggerCarga);
       }} >
       <ListItemIcon>
         <InboxIcon />
       </ListItemIcon>
-      <ListItemText primary="Contratadas"  />
+      <ListItemText primary="M. Helado Duro"  />
     </ListItem>
     </Tooltip>
 
+    <Tooltip title="M. Helado Suaves" placement="right" disableHoverListener={open} >
+    <ListItem button onClick={()=>{
+          history.push('/dashboard/maquinas-de-helado-suave');
+          setTriggerCarga(!triggerCarga);
+      }} >
+      <ListItemIcon>
+        <InboxIcon />
+      </ListItemIcon>
+      <ListItemText primary="M. Helado Suave"  />
+    </ListItem>
+    </Tooltip>
+
+    <Tooltip title="Maquinas Paleteras" placement="right" disableHoverListener={open} >
+    <ListItem button onClick={()=>{
+          history.push('/dashboard/maquinas-paleteras');
+          setTriggerCarga(!triggerCarga);
+      }} >
+      <ListItemIcon>
+        <InboxIcon />
+      </ListItemIcon>
+      <ListItemText primary="Maquinas Paleteras"  />
+    </ListItem>
+    </Tooltip>
+
+    <Tooltip title="Otros y accesorios" placement="right" disableHoverListener={open} >
+    <ListItem button onClick={()=>{
+          history.push('/dashboard/otros-y-accesorios');
+          setTriggerCarga(!triggerCarga);
+      }} >
+      <ListItemIcon>
+        <InboxIcon />
+      </ListItemIcon>
+      <ListItemText primary="Otros y accesorios"  />
+    </ListItem>
+    </Tooltip>
+
+    <Tooltip title="Bases para helado" placement="right" disableHoverListener={open} >
+    <ListItem button onClick={()=>{
+          history.push('/dashboard/bases-para-helado');
+          setTriggerCarga(!triggerCarga);
+      }} >
+      <ListItemIcon>
+        <InboxIcon />
+      </ListItemIcon>
+      <ListItemText primary="Bases para helado"  />
+    </ListItem>
+    </Tooltip>
+
+    <Tooltip title="Slider" placement="right" disableHoverListener={open} >
+    <ListItem button onClick={()=>{
+          history.push('/dashboard/slider');
+          setTriggerCarga(!triggerCarga);
+      }} >
+      <ListItemIcon>
+        <InboxIcon />
+      </ListItemIcon>
+      <ListItemText primary="Slider"  />
+    </ListItem>
+    </Tooltip>
+
+    <Tooltip title="Recetas" placement="right" disableHoverListener={open} >
+    <ListItem button onClick={()=>{
+          history.push('/dashboard/recetas');
+          setTriggerCarga(!triggerCarga);
+      }} >
+      <ListItemIcon>
+        <InboxIcon />
+      </ListItemIcon>
+      <ListItemText primary="Recetas"  />
+    </ListItem>
+    </Tooltip>
    
    
 

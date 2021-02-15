@@ -4,7 +4,6 @@ import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import Backdrop from '@material-ui/core/Backdrop';
-import logoGana from '../LOGO-GANA-.png';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Alert from '@material-ui/lab/Alert';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
@@ -64,7 +63,7 @@ export default function InicioLogin(props) {
       setOpen(true);
 
       await firebase.auth().signInWithEmailAndPassword(usuario.email, usuario.password).then(()=>{
-          props.history.push('/dashboard');
+          props.history.push('/dashboard/maquinas-de-helado-duro');
           
 
       }).catch((e)=>{
@@ -99,7 +98,7 @@ export default function InicioLogin(props) {
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
-        <img src={logoGana} style={{width:160, height:160}}></img>
+        <img src='/emerymark-logo.png' ></img>
         <Typography component="h1" variant="h5" style={{paddingBottom:10 }}>
           Iniciar Sesion
         </Typography>
@@ -135,7 +134,7 @@ export default function InicioLogin(props) {
             type="submit"
             fullWidth
             variant="contained"
-            style={{background:'#ffa323', marginTop:20, color: 'white'}}
+            style={{background:'rgb(211 28 34)', marginTop:20, color: 'white'}}
             className={classes.submit}
           >
             Iniciar Sesion

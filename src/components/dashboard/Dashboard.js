@@ -1,12 +1,8 @@
 import React,{useEffect, useState, useContext} from 'react';
 import clsx from 'clsx';
-import llantasContext from '../../context/llantasContext';
-import CrearRecibo from './CrearRecibo';
-import tableIcons from './TableIcons';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Drawer from '@material-ui/core/Drawer';
-import Box from '@material-ui/core/Box';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import List from '@material-ui/core/List';
@@ -16,17 +12,10 @@ import IconButton from '@material-ui/core/IconButton';
 import Badge from '@material-ui/core/Badge';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
-import Link from '@material-ui/core/Link';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
-import PaperEstadisticas from '../graficos/PaperEstadisticas';
 import ListItems from './ListItems';
-import Chart from './Chart';
-import Deposits from './Deposits';
-import Orders from './Orders';
-import TablaClientesBaseDatos from './TablaClientesBaseDatos';
 import Loading from '../Ui/Loading';
 import { useHistory } from "react-router-dom";
 import TablaClientes from './TablaClientes';
@@ -213,13 +202,9 @@ export default function Dashboard({palabra}) {
             <MenuIcon />
           </IconButton>
           <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
-            Mudanzas Gana Dashboard
+            EmeryMark Dashboard
           </Typography>
-          <IconButton color="inherit">
-            <Badge badgeContent={4} color="secondary">
-              <NotificationsIcon />
-            </Badge>
-          </IconButton>
+          
         </Toolbar>
       </AppBar>
       <Drawer
@@ -245,57 +230,18 @@ export default function Dashboard({palabra}) {
           <Grid container spacing={3}>
             {/* Chart */}
            
-            {/* Todas */}
-            <Grid item xs={12} md={4} lg={3}>
-              <Paper className={fixedHeightPaper}>
-                <Deposits 
-                  fechaMaster={true}
-                  numero={datosEstadisticos.todas}
-                  titulo='Todas'
-                />
-              </Paper>
-            </Grid>
 
-             {/* Pendientes */}
-            <Grid item xs={12} md={4} lg={3}>
-              <Paper className={fixedHeightPaper}>
-              <Deposits 
-                  numero={datosEstadisticos.pendientes}
-                  titulo='Pendientes'
-                />
-              </Paper>
-            </Grid>
-
-             
-
-            
-
-               {/* Contratadas */}
-            <Grid item xs={12} md={4} lg={3}>
-              <Paper className={fixedHeightPaper}>
-              <Deposits 
-                  numero={datosEstadisticos.contratadas}
-                  titulo='Contratadas'
-                />
-              </Paper>
-            </Grid>
-
-         
-
-          
-
-            <PaperEstadisticas/>
-            {/* Recent Orders */}
-            
           </Grid>
           <Loading activadorLoading={activadorLoading}/>
-        </Container> : palabra === 'recibo'? <CrearRecibo/> : palabra === 'clientes'? <Grid item xs={12}>
-              
-              <TablaClientesBaseDatos/>
-            
-          </Grid> :
-      palabra === 'ordenes-manuales'? <TablaClientes/> :
-      palabra === 'todas'? <TablaClientes palabra='todas'  triggerCarga={triggerCarga} setTriggerCarga={setTriggerCarga}/> :
+        </Container> : 
+      palabra === 'ordenes-manuales'? <TablaClientes /> :
+      palabra === 'maquinas-de-helado-duro'? <TablaClientes palabra={palabra}  triggerCarga={triggerCarga} setTriggerCarga={setTriggerCarga}  categoria='maquinas de helado duro'/> :
+      palabra === 'maquinas-de-helado-suave'? <TablaClientes palabra={palabra}  triggerCarga={triggerCarga} setTriggerCarga={setTriggerCarga}  categoria='maquinas de helado suave'/> :
+      palabra === 'maquinas-paleteras'? <TablaClientes palabra={palabra}  triggerCarga={triggerCarga} setTriggerCarga={setTriggerCarga}  categoria='maquinas paleteras'/> :
+      palabra === 'bases-para-helado'? <TablaClientes palabra={palabra}  triggerCarga={triggerCarga} setTriggerCarga={setTriggerCarga}  categoria='bases para helado'/> :
+      palabra === 'otros-y-accesorios'? <TablaClientes palabra={palabra}  triggerCarga={triggerCarga} setTriggerCarga={setTriggerCarga}  categoria='otros y accesorios'/> :
+      palabra === 'slider'? <TablaClientes palabra={palabra}  triggerCarga={triggerCarga} setTriggerCarga={setTriggerCarga}  categoria='slider'/> :
+      palabra === 'recetas'? <TablaClientes palabra={palabra}  triggerCarga={triggerCarga} setTriggerCarga={setTriggerCarga}  categoria='recetas'/> :
       palabra === 'pendientes'? <TablaClientes palabra='pendientes'  triggerCarga={triggerCarga} setTriggerCarga={setTriggerCarga}/> :
       <TablaClientes palabra='contratadas'  triggerCarga={triggerCarga} setTriggerCarga={setTriggerCarga}/> 
          
