@@ -100,7 +100,7 @@ export default function InicioLogin(props) {
       <div className={classes.paper}>
         <img src='/emerymark-logo.png' ></img>
         <Typography component="h1" variant="h5" style={{paddingBottom:10 }}>
-          Iniciar Sesion
+          Iniciar Sesion INGLES
         </Typography>
         {comprobadorAlerta !== '' && <Alert severity="error">{comprobadorAlerta}</Alert>}
         <form className={classes.form} onSubmit={iniciarApp}>
@@ -137,7 +137,7 @@ export default function InicioLogin(props) {
             style={{background:'rgb(211 28 34)', marginTop:20, color: 'white'}}
             className={classes.submit}
           >
-            Iniciar Sesion
+            Iniciar Sesion 
           </Button>
       
         </form>

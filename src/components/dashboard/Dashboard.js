@@ -202,7 +202,7 @@ export default function Dashboard({palabra}) {
             <MenuIcon />
           </IconButton>
           <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
-            EmeryMark Dashboard
+            EmeryMark Dashboard Idioma INGLES
           </Typography>
           
         </Toolbar>

@@ -74,9 +74,9 @@ export default function ModalDatos({abrirModal,
                    if(palabra === 'recetas'){
 
                     
-                    await db.collection('recetas').where('titulo','==', queryActualizar).get().then(function(querySnapshot) {
+                    await db.collection('recetasIngles').where('titulo','==', queryActualizar).get().then(function(querySnapshot) {
                       querySnapshot.forEach(function(doc) {
-                          db.collection('recetas').doc(doc.id).update({
+                          db.collection('recetasIngles').doc(doc.id).update({
   
                     fotoPrincipal: downloadURLsSingle,
                     fotoSecundariaRecetas: fotoSecundariaRecetas,
@@ -98,9 +98,9 @@ export default function ModalDatos({abrirModal,
 
                   if(palabra !== 'slider' && palabra !== 'recetas'){
 
-                    await db.collection('productos').where('titulo','==', queryActualizar).get().then(function(querySnapshot) {
+                    await db.collection('productosIngles').where('titulo','==', queryActualizar).get().then(function(querySnapshot) {
                       querySnapshot.forEach(function(doc) {
-                          db.collection('productos').doc(doc.id).update({
+                          db.collection('productosIngles').doc(doc.id).update({
   
                     fotoPrincipal: downloadURLsSingle,
                     arrayFotos: downloadURLs,
@@ -150,7 +150,7 @@ export default function ModalDatos({abrirModal,
 
                   if(palabra === 'recetas'){
 
-                    await db.collection('recetas').add({
+                    await db.collection('recetasIngles').add({
 
                      fotoPrincipal: downloadURLsSingle,
                       fotoSecundariaRecetas: fotoSecundariaRecetas,
@@ -169,7 +169,7 @@ export default function ModalDatos({abrirModal,
 
                   if(palabra !== 'recetas' && palabra !== 'slider'){
 
-                    await db.collection('productos').add({
+                    await db.collection('productosIngles').add({
 
                       fotoPrincipal: downloadURLsSingle,
                       creado: fecha,

@@ -66,7 +66,7 @@ export default function MaterialTableDemo({palabra, triggerCarga, setTriggerCarg
 
     if(palabra === 'recetas'){
 
-      await db.collection('recetas').where('titulo','==', titulo).get().then(datos=>{
+      await db.collection('recetasIngles').where('titulo','==', titulo).get().then(datos=>{
         datos.forEach((doc)=>{
 
           setMultipleObject({...multipleObject,
@@ -109,7 +109,7 @@ export default function MaterialTableDemo({palabra, triggerCarga, setTriggerCarg
 
     if(palabra !== 'slider' && palabra !== 'recetas'){
         
-      await db.collection('productos').where('titulo','==', titulo).get().then(datos=>{
+      await db.collection('productosIngles').where('titulo','==', titulo).get().then(datos=>{
         datos.forEach((doc)=>{
 
           setMultipleObject({...multipleObject,
@@ -244,7 +244,7 @@ export default function MaterialTableDemo({palabra, triggerCarga, setTriggerCarg
 
      const traerDatosProductos = async ()=>{
 
-      await db.collection('productos').where('url','==', palabra).get().then(datos=>{
+      await db.collection('productosIngles').where('url','==', palabra).get().then(datos=>{
              
         datos.forEach(doc=>{
           datosClientesNuevosFirebase.push(doc.data());
@@ -490,9 +490,9 @@ export default function MaterialTableDemo({palabra, triggerCarga, setTriggerCarg
 
                 if(palabra !== 'slider' && palabra !== 'recetas'){
 
-                  db.collection('productos').where('titulo','==', oldData.titulo).get().then(function(querySnapshot) {
+                  db.collection('productosIngles').where('titulo','==', oldData.titulo).get().then(function(querySnapshot) {
                     querySnapshot.forEach(function(doc) {
-                        db.collection('productos').doc(doc.id).delete().then(()=>{
+                        db.collection('productosIngles').doc(doc.id).delete().then(()=>{
                         })
                     });
                      
